@@ -16,6 +16,14 @@ stages
             }
         }
 
+	stage('IaC')
+	{
+	steps
+	{
+	sh 'cd tr && terraform init'
+	}
+	}
+
 }
 }
 
