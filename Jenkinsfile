@@ -16,6 +16,22 @@ stages
             }
         }
 
+
+	stage('Tag Image')
+	{
+	steps{
+	       sh 'docker image tag httptst susigugh/httptst:1.0'
+            }
+        }
+
+
+	stage('Push Image to Docker Hub')
+	{
+	steps{
+        sh 'docker login -u=${udockersusigugh} -p=${pdockersusigugh} && docker push susigugh/httptst:1.0'
+	}
+	}
+
 	stage('IaC')
 	{
 	steps
