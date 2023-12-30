@@ -39,7 +39,7 @@ steps
 {
 sh 'chmod 600 jmtksrv01.pem'
 sh 'scp -i jmtksrv01.pem -o StrictHostKeyChecking=no kubernetes/httpdep.yaml ec2-user@15.206.94.237:/home/ec2-user'
-sh 'ssh -i jmtksrv01.pem -o StrictHostKeyChecking=no ec2-user@15.206.94.237 "cd /home/ec2-user && kubectl delete -f httpdep.yaml && kubectl create -f httpdep.yaml"
+sh 'ssh -i jmtksrv01.pem -o StrictHostKeyChecking=no ec2-user@15.206.94.237 "cd /home/ec2-user && kubectl delete -f httpdep.yaml && kubectl create -f httpdep.yaml"'
 }
 }
 
