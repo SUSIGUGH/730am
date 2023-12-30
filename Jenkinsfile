@@ -38,7 +38,7 @@ stage('Deploy to Kubernetes')
 steps
 {
 sh 'chmod 600 jmtksrv01.pem'
-sh 'scp -i jmtksrv01.pem kubernetes/httpdep.yaml ec2-user@3.6.1.16:/home/ec2-user'
+sh 'scp -i jmtksrv01.pem -o StrictHostKeyChecking=no kubernetes/httpdep.yaml ec2-user@3.6.1.16:/home/ec2-user'
 }
 }
 
