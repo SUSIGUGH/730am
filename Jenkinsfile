@@ -38,8 +38,10 @@ stage('Deploy to Kubernetes')
 steps
 {
 sh 'chmod 600 jmtksrv01.pem'
-sh 'scp -i jmtksrv01.pem -o StrictHostKeyChecking=no kubernetes/httpdep.yaml ec2-user@15.206.94.237:/home/ec2-user'
-sh 'ssh -i jmtksrv01.pem -o StrictHostKeyChecking=no ec2-user@15.206.94.237 "cd /home/ec2-user && kubectl create -f httpdep.yaml && kubectl get deployments -n dev"'
+sh 'scp -i jmtksrv01.pem -o StrictHostKeyChecking=no kubernetes/mysql.yaml ec2-user@15.206.94.237:/home/ec2-user'
+sh 'scp -i jmtksrv01.pem -o StrictHostKeyChecking=no kubernetes/mysqlsrv.yaml ec2-user@15.206.94.237:/home/ec2-user'
+sh 'ssh -i jmtksrv01.pem -o StrictHostKeyChecking=no ec2-user@15.206.94.237 "cd /home/ec2-user && kubectl create -f mysql.yaml && kubectl get deployments -n dev"'
+sh 'ssh -i jmtksrv01.pem -o StrictHostKeyChecking=no ec2-user@15.206.94.237 "cd /home/ec2-user && kubectl create -f mysqlsrv.yaml && kubectl get deployments -n dev"'
 }
 }
 

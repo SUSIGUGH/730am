@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: susimysql
+  namespace: dev
+  labels:
+    type: backend
+spec:
+  containers:
+    - name: susimysql
+      image: susigugh/jmkmysql:15-dec
+
