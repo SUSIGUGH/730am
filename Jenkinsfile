@@ -18,7 +18,7 @@ stages
 	stage('Tag Image')
 	{
 	steps{
-	       sh 'docker image tag susmysql susigugh/susmysql:l'
+	       sh 'docker image tag susimysql susigugh/susimysql:l'
 	       sh 'docker image tag susiphp susigugh/susiphp:l'
             }
         }
