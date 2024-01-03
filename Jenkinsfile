@@ -9,10 +9,8 @@ stages
 	    sh 'ls -ltr'
 	    sh 'pwd'
                 echo "I am in build"
-                sh 'cd docker && docker build -t httptst .'
-                sh 'docker image ls | grep httptst'
-	//	sh 'docker stop httptst01 && docker rm httptst01'
-	//	sh 'docker run -dit --name httptst01 -p80:80 httptst'
+                sh 'cd docker/mysql && docker build -t susimysql .'
+                sh 'cd docker/php && docker build -t susiphp .'
             }
         }
 
@@ -20,7 +18,8 @@ stages
 	stage('Tag Image')
 	{
 	steps{
-	       sh 'docker image tag httptst susigugh/httptst:1.0'
+	       sh 'docker image tag susmysql susigugh/susmysql:l'
+	       sh 'docker image tag susiphp susigugh/susiphp:l'
             }
         }
 
@@ -28,7 +27,8 @@ stages
 	stage('Push Image to Docker Hub')
 	{
 	steps{
-        sh 'docker login -u=${udockersusigugh} -p=${pdockersusigugh} && docker push susigugh/httptst:1.0'
+        sh 'docker login -u=${udockersusigugh} -p=${pdockersusigugh} && docker push susigugh/susimysql:l'
+        sh 'docker login -u=${udockersusigugh} -p=${pdockersusigugh} && docker push susigugh/susiphp:l'
 	}
 	}
 
@@ -38,10 +38,12 @@ stage('Deploy to Kubernetes')
 steps
 {
 sh 'chmod 600 jmtksrv01.pem'
-sh 'scp -i jmtksrv01.pem -o StrictHostKeyChecking=no kubernetes/mysql.yaml ec2-user@15.206.94.237:/home/ec2-user'
-sh 'scp -i jmtksrv01.pem -o StrictHostKeyChecking=no kubernetes/mysqlsrv.yaml ec2-user@15.206.94.237:/home/ec2-user'
+sh 'scp -i jmtksrv01.pem -o StrictHostKeyChecking=no kubernetes/*.yaml ec2-user@15.206.94.237:/home/ec2-user'
 sh 'ssh -i jmtksrv01.pem -o StrictHostKeyChecking=no ec2-user@15.206.94.237 "cd /home/ec2-user && kubectl create -f mysql.yaml && kubectl get deployments -n dev"'
 sh 'ssh -i jmtksrv01.pem -o StrictHostKeyChecking=no ec2-user@15.206.94.237 "cd /home/ec2-user && kubectl create -f mysqlsrv.yaml && kubectl get deployments -n dev"'
+sh 'ssh -i jmtksrv01.pem -o StrictHostKeyChecking=no ec2-user@15.206.94.237 "cd /home/ec2-user && kubectl create -f php.yaml && kubectl get deployments -n dev"'
+sh 'ssh -i jmtksrv01.pem -o StrictHostKeyChecking=no ec2-user@15.206.94.237 "cd /home/ec2-user && kubectl create -f phpsrv.yaml && kubectl get deployments -n dev"'
+// sh 'ssh -i jmtksrv01.pem -o StrictHostKeyChecking=no ec2-user@15.206.94.237 "cd /home/ec2-user && "'
 }
 }
 

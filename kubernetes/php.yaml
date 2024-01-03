@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: php
+  namespace: dev
+  labels:
+    app: php
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: php
+  template:
+    metadata:
+      name: php
+      labels:
+        app: php
+    spec:
+      containers:
+        - name: susiphp
+          image: susigugh/susiphp:l

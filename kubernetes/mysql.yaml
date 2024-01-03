@@ -8,5 +8,5 @@ metadata:
 spec:
   containers:
     - name: susimysql
-      image: susigugh/jmkmysql:15-dec
+      image: susigugh/susimysql:l
 
