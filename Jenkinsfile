@@ -48,7 +48,6 @@ sh 'ssh -i jmtksrv01.pem -o StrictHostKeyChecking=no ec2-user@15.206.94.237 "noh
 }
 }
 
-// Test
 //	stage('IaC')
 //	{
 //	steps
