@@ -45,7 +45,7 @@ sh 'ssh -i jmtksrv01.pem -o StrictHostKeyChecking=no ec2-user@15.206.94.237 "cd 
 sh 'ssh -i jmtksrv01.pem -o StrictHostKeyChecking=no ec2-user@15.206.94.237 "cd /home/ec2-user && kubectl create -f phpsrv.yaml && kubectl get deployments -n dev"'
 sleep 60
 sh 'ssh -i jmtksrv01.pem -o StrictHostKeyChecking=no ec2-user@15.206.94.237 "kubectl port-forward --address 0.0.0.0 services/php-srv 30034:80 -n dev > output.log 2>&1 &"'
-sh 'ssh -i jmtksrv01.pem -o StrictHostKeyChecking=no ec2-user@15.206.94.237 "kubectl port-forward --address 0.0.0.0 services/mysql-srv 30033:3306 -n dev > output.log 2>&1 &"'
+sh 'ssh -i jmtksrv01.pem -o StrictHostKeyChecking=no ec2-user@15.206.94.237 "kubectl port-forward --address 0.0.0.0 services/mysql-srv 30033:3306 -n dev > output1.log 2>&1 &"'
 }
 }
 // Test
