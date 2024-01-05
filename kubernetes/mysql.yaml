@@ -9,4 +9,7 @@ spec:
   containers:
     - name: susimysql
       image: susigugh/susimysql:l
+      ports:
+      - containerPort: 3306
+
 

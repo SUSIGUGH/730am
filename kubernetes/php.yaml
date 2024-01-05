@@ -19,3 +19,5 @@ spec:
       containers:
         - name: susiphp
           image: susigugh/susiphp:l
+          ports:
+          - containerPort: 80

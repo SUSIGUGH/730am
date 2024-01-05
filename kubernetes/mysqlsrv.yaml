@@ -4,6 +4,7 @@ metadata:
   labels:
     app: mysql
   name: mysql-srv
+  namespace: dev
 spec:
   ports:
   - nodePort: 30033
