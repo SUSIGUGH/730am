@@ -47,7 +47,7 @@ sh 'ssh -i jmtksrv01.pem -o StrictHostKeyChecking=no ec2-user@15.206.94.237 "noh
 sh 'ssh -i jmtksrv01.pem -o StrictHostKeyChecking=no ec2-user@15.206.94.237 "nohup kubectl port-forward --address 0.0.0.0 services/mysql-srv 30033:3306 &"'
 }
 }
-
+// Test
 //	stage('IaC')
 //	{
 //	steps
