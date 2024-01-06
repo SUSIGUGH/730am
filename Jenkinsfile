@@ -39,10 +39,10 @@ steps
 {
 sh 'chmod 600 jmtksrv01.pem'
 sh 'scp -i jmtksrv01.pem -o StrictHostKeyChecking=no kubernetes/*.yaml ec2-user@15.206.94.237:/home/ec2-user'
-sh 'ssh -i jmtksrv01.pem -o StrictHostKeyChecking=no ec2-user@15.206.94.237 "cd /home/ec2-user && kubectl create -f mysql.yaml && kubectl get pods -n dev"'
-sh 'ssh -i jmtksrv01.pem -o StrictHostKeyChecking=no ec2-user@15.206.94.237 "cd /home/ec2-user && kubectl create -f mysqlsrv.yaml && kubectl get services -n dev"'
-sh 'ssh -i jmtksrv01.pem -o StrictHostKeyChecking=no ec2-user@15.206.94.237 "cd /home/ec2-user && kubectl create -f php.yaml && kubectl get deployments -n dev"'
-sh 'ssh -i jmtksrv01.pem -o StrictHostKeyChecking=no ec2-user@15.206.94.237 "cd /home/ec2-user && kubectl create -f phpsrv.yaml && kubectl get deployments -n dev"'
+sh 'ssh -i jmtksrv01.pem -o StrictHostKeyChecking=no ec2-user@15.206.94.237 "cd /home/ec2-user && kubectk delete pod susimysql -n dev && kubectl create -f mysql.yaml && kubectl get pods -n dev"'
+sh 'ssh -i jmtksrv01.pem -o StrictHostKeyChecking=no ec2-user@15.206.94.237 "cd /home/ec2-user && kubectl delete svc mysql-srv -n dev && kubectl create -f mysqlsrv.yaml && kubectl get services -n dev"'
+sh 'ssh -i jmtksrv01.pem -o StrictHostKeyChecking=no ec2-user@15.206.94.237 "cd /home/ec2-user && kubectl delete deployment php -n dev && kubectl create -f php.yaml && kubectl get deployments -n dev"'
+sh 'ssh -i jmtksrv01.pem -o StrictHostKeyChecking=no ec2-user@15.206.94.237 "cd /home/ec2-user && kubectl delete svc php-srv -n dev && kubectl create -f phpsrv.yaml && kubectl get deployments -n dev"'
 sleep 60
 sh 'ssh -i jmtksrv01.pem -o StrictHostKeyChecking=no ec2-user@15.206.94.237 "kubectl port-forward --address 0.0.0.0 services/php-srv 30034:80 -n dev > output.log 2>&1 &"'
 sh 'ssh -i jmtksrv01.pem -o StrictHostKeyChecking=no ec2-user@15.206.94.237 "kubectl port-forward --address 0.0.0.0 services/mysql-srv 30033:3306 -n dev > output1.log 2>&1 &"'
